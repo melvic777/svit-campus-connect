@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -96,33 +95,49 @@ const StudyMaterials = () => {
     });
   }, []);
 
-  const filteredMaterials = materials.filter(material => {
-    const matchesSearch = material.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         material.subject.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSemester = selectedSemester === 'all' || material.semester === selectedSemester;
-    const matchesType = selectedType === 'all' || material.type === selectedType;
-    
-    return matchesSearch && matchesSemester && matchesType;
-  });
+  function filteredMaterials() {
+    return materials.filter(material => {
+      const matchesSearch = material.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           material.subject.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSemester = selectedSemester === 'all' || material.semester === selectedSemester;
+      const matchesType = selectedType === 'all' || material.type === selectedType;
+      
+      return matchesSearch && matchesSemester && matchesType;
+    });
+  }
 
-  const getTypeIcon = (type: string) => {
+  function getTypeIcon(type: string) {
     switch (type) {
       case 'notes': return <FileText className="h-4 w-4" />;
       case 'paper': return <BookOpen className="h-4 w-4" />;
       case 'video': return <Video className="h-4 w-4" />;
       default: return <FileText className="h-4 w-4" />;
     }
-  };
+  }
 
   return (
     <div className="container mx-auto px-4 py-8" ref={pageRef}>
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
-          Study Materials
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          Access comprehensive study resources organized by subject and semester
-        </p>
+      {/* Hero Section with Study Image */}
+      <div className="text-center mb-8 relative">
+        <div className="relative mb-6 h-64 rounded-lg overflow-hidden">
+          <img 
+            src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=400&fit=crop&crop=center"
+            alt="Students studying with books and laptops"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
+                Study Materials
+              </h1>
+              <p className="text-xl text-foreground/90">
+                Access comprehensive study resources organized by subject and semester
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Search and Filters */}
@@ -168,6 +183,46 @@ const StudyMaterials = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Statistics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <Card className="bg-white/5 border-border/60 backdrop-blur-sm">
+          <CardContent className="p-6 text-center">
+            <img 
+              src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=100&h=100&fit=crop&crop=center"
+              alt="Academic notes"
+              className="w-16 h-16 mx-auto mb-4 rounded-lg object-cover"
+              loading="lazy"
+            />
+            <h3 className="text-2xl font-bold text-primary">{materials.filter(m => m.type === 'notes').length}</h3>
+            <p className="text-muted-foreground">Study Notes</p>
+          </CardContent>
+        </Card>
+        <Card className="bg-white/5 border-border/60 backdrop-blur-sm">
+          <CardContent className="p-6 text-center">
+            <img 
+              src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=100&h=100&fit=crop&crop=center"
+              alt="Previous papers"
+              className="w-16 h-16 mx-auto mb-4 rounded-lg object-cover"
+              loading="lazy"
+            />
+            <h3 className="text-2xl font-bold text-green-400">{materials.filter(m => m.type === 'paper').length}</h3>
+            <p className="text-muted-foreground">Previous Papers</p>
+          </CardContent>
+        </Card>
+        <Card className="bg-white/5 border-border/60 backdrop-blur-sm">
+          <CardContent className="p-6 text-center">
+            <img 
+              src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=100&h=100&fit=crop&crop=center"
+              alt="Video lectures"
+              className="w-16 h-16 mx-auto mb-4 rounded-lg object-cover"
+              loading="lazy"
+            />
+            <h3 className="text-2xl font-bold text-blue-400">{materials.filter(m => m.type === 'video').length}</h3>
+            <p className="text-muted-foreground">Video Lectures</p>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Materials Grid */}
       <div className="materials-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -75,6 +74,16 @@ const Results = () => {
 
   const LoginForm = () => (
     <div className="max-w-md mx-auto">
+      {/* Academic Hero Image */}
+      <div className="text-center mb-8">
+        <img 
+          src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=300&fit=crop&crop=center"
+          alt="Academic success and results"
+          className="w-full h-48 object-cover rounded-lg mb-6"
+          loading="eager"
+        />
+      </div>
+
       <Card className="bg-white/5 border-border/60 backdrop-blur-sm">
         <CardHeader className="text-center">
           <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -135,6 +144,22 @@ const Results = () => {
 
   const ResultsDashboard = () => (
     <div className="space-y-6">
+      {/* Success Banner */}
+      <div className="relative mb-8">
+        <img 
+          src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&h=300&fit=crop&crop=center"
+          alt="Academic achievement celebration"
+          className="w-full h-48 object-cover rounded-lg"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-background/40 rounded-lg flex items-center">
+          <div className="px-8">
+            <h2 className="text-3xl font-bold mb-2">Academic Dashboard</h2>
+            <p className="text-lg text-muted-foreground">Track your academic progress and achievements</p>
+          </div>
+        </div>
+      </div>
+
       {/* Header with Overall Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="bg-white/5 border-border/60 backdrop-blur-sm">

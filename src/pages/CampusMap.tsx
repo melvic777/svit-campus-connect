@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -83,11 +82,13 @@ const CampusMap = () => {
     });
   }, []);
 
-  const filteredLocations = filter === 'all' 
-    ? locations 
-    : locations.filter(location => location.type === filter);
+  function filteredLocations() {
+    return filter === 'all' 
+      ? locations 
+      : locations.filter(location => location.type === filter);
+  }
 
-  const getTypeColor = (type: string) => {
+  function getTypeColor(type: string) {
     switch (type) {
       case 'academic': return 'bg-blue-500';
       case 'facility': return 'bg-green-500';
@@ -95,17 +96,31 @@ const CampusMap = () => {
       case 'transport': return 'bg-purple-500';
       default: return 'bg-gray-500';
     }
-  };
+  }
 
   return (
     <div className="container mx-auto px-4 py-8" ref={pageRef}>
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
-          Interactive Campus Map
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          Explore SVIT campus with our interactive 3D map
-        </p>
+      {/* Hero Section with Campus Image */}
+      <div className="text-center mb-8 relative">
+        <div className="relative mb-6 h-64 rounded-lg overflow-hidden">
+          <img 
+            src="https://images.unsplash.com/photo-1562774053-701939374585?w=1200&h=400&fit=crop&crop=center"
+            alt="Aerial view of modern campus"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
+                Interactive Campus Map
+              </h1>
+              <p className="text-xl text-foreground/90">
+                Explore SVIT campus with our interactive 3D map
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -153,36 +168,34 @@ const CampusMap = () => {
             <CardContent>
               <div 
                 ref={mapRef}
-                className="relative w-full h-96 bg-gradient-to-br from-green-900/20 to-green-700/20 rounded-lg border border-border/20 overflow-hidden"
+                className="relative w-full h-96 rounded-lg border border-border/20 overflow-hidden"
                 style={{
-                  backgroundImage: `
-                    linear-gradient(45deg, rgba(34, 197, 94, 0.1) 25%, transparent 25%),
-                    linear-gradient(-45deg, rgba(34, 197, 94, 0.1) 25%, transparent 25%),
-                    linear-gradient(45deg, transparent 75%, rgba(34, 197, 94, 0.1) 75%),
-                    linear-gradient(-45deg, transparent 75%, rgba(34, 197, 94, 0.1) 75%)
-                  `,
-                  backgroundSize: '20px 20px',
-                  backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
+                  backgroundImage: `url('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=300&h=150&fit=crop&crop=center')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
                 }}
               >
+                {/* Overlay for better pin visibility */}
+                <div className="absolute inset-0 bg-black/20"></div>
+                
                 {/* Campus Roads */}
                 <div className="absolute inset-0">
-                  <div className="absolute top-1/2 left-0 right-0 h-2 bg-gray-600/30 transform -translate-y-1/2"></div>
-                  <div className="absolute top-0 bottom-0 left-1/2 w-2 bg-gray-600/30 transform -translate-x-1/2"></div>
+                  <div className="absolute top-1/2 left-0 right-0 h-2 bg-gray-300/50 transform -translate-y-1/2"></div>
+                  <div className="absolute top-0 bottom-0 left-1/2 w-2 bg-gray-300/50 transform -translate-x-1/2"></div>
                 </div>
 
                 {/* Location Pins */}
                 {filteredLocations.map((location) => (
                   <div
                     key={location.id}
-                    className={`location-pin absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer`}
+                    className={`location-pin absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10`}
                     style={{
                       left: `${location.coordinates.x}%`,
                       top: `${location.coordinates.y}%`
                     }}
                     onClick={() => setSelectedLocation(location)}
                   >
-                    <div className={`w-8 h-8 rounded-full ${getTypeColor(location.type)} flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform duration-200`}>
+                    <div className={`w-8 h-8 rounded-full ${getTypeColor(location.type)} flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform duration-200 border-2 border-white`}>
                       {location.icon}
                     </div>
                     <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity">
@@ -192,7 +205,7 @@ const CampusMap = () => {
                 ))}
 
                 {/* Compass */}
-                <div className="absolute top-4 right-4 bg-black/50 rounded-full p-2">
+                <div className="absolute top-4 right-4 bg-black/50 rounded-full p-2 z-10">
                   <Navigation className="h-6 w-6 text-white" style={{ transform: 'rotate(45deg)' }} />
                 </div>
               </div>
@@ -255,6 +268,29 @@ const CampusMap = () => {
                   <span>{label}</span>
                 </div>
               ))}
+            </CardContent>
+          </Card>
+
+          {/* Campus Info */}
+          <Card className="bg-white/5 border-border/60 backdrop-blur-sm mt-6">
+            <CardHeader>
+              <CardTitle className="text-sm">Campus Info</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <img 
+                  src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=300&h=150&fit=crop&crop=center"
+                  alt="Campus building"
+                  className="w-full h-20 object-cover rounded-lg"
+                  loading="lazy"
+                />
+                <div className="text-xs text-muted-foreground space-y-1">
+                  <p>• Campus Area: 50+ Acres</p>
+                  <p>• Buildings: 15 Academic & Administrative</p>
+                  <p>• Labs: 50+ Modern Laboratories</p>
+                  <p>• Capacity: 5000+ Students</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
