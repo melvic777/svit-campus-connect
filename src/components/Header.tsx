@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -14,7 +13,7 @@ const Header = () => {
   ];
 
   const openStudentPortal = () => {
-    window.open('/student-portal', '_blank', 'noopener,noreferrer');
+    window.open('https://svit-portal-glass-glow.vercel.app/', '_blank', 'noopener,noreferrer');
   };
 
   return (
