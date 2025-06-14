@@ -58,7 +58,8 @@ const Results = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoggedIn(true);
+    // Redirect to the external results website
+    window.open('https://jntuhresults.vercel.app/academicresult', '_blank', 'noopener,noreferrer');
   };
 
   const getGradeColor = (grade: string) => {
