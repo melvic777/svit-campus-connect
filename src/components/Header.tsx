@@ -6,9 +6,10 @@ import { Menu, GraduationCap } from 'lucide-react';
 
 const Header = () => {
   const navLinks = [
+    { name: 'Chatbot', path: '/chatbot' },
     { name: 'Results', path: '/results' },
-    { name: 'Study Material', path: '/study-material' },
-    { name: 'Lost & Found', path: '/lost-and-found' },
+    { name: 'Study Materials', path: '/study-materials' },
+    { name: 'Lost & Found', path: '/lost-found' },
     { name: 'Campus Map', path: '/campus-map' },
   ];
 
