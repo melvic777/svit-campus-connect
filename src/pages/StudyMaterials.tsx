@@ -1,9 +1,8 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Download, Search, Filter, FileText, Video } from 'lucide-react';
+import { BookOpen, Download, Search, Filter, FileText, Video, ExternalLink } from 'lucide-react';
 import { gsap } from 'gsap';
 
 interface StudyMaterial {
@@ -21,6 +20,37 @@ const StudyMaterials = () => {
   const [selectedSemester, setSelectedSemester] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
   const pageRef = useRef(null);
+
+  // External links for study materials
+  const externalResources = [
+    {
+      title: 'Study Notes',
+      description: 'Complete notes organized by subject and semester',
+      icon: FileText,
+      url: 'https://drive.google.com/drive/folders/1Mc3MjPMIXIcP8ZpPEmWxBqkSWHaz7wP-?usp=sharing',
+      color: 'text-blue-400',
+      bgColor: 'bg-blue-400/20',
+      lastUpdated: '2025-06-10'
+    },
+    {
+      title: 'Previous Year Papers',
+      description: 'Question papers from previous examinations',
+      icon: BookOpen,
+      url: 'https://drive.google.com/drive/folders/1Mc3MjPMIXIcP8ZpPEmWxBqkSWHaz7wP-?usp=sharing',
+      color: 'text-green-400',
+      bgColor: 'bg-green-400/20',
+      lastUpdated: '2025-06-08'
+    },
+    {
+      title: 'Video Lectures',
+      description: 'Comprehensive video lectures by Sudhakar Atchala',
+      icon: Video,
+      url: 'https://www.youtube.com/@SudhakarAtchala/playlists',
+      color: 'text-red-400',
+      bgColor: 'bg-red-400/20',
+      lastUpdated: '2025-06-12'
+    }
+  ];
 
   const materials: StudyMaterial[] = [
     {
@@ -94,6 +124,19 @@ const StudyMaterials = () => {
       stagger: 0.1,
       ease: 'power3.out',
     });
+
+    gsap.from(".resource-card", {
+      scrollTrigger: {
+        trigger: ".resources-section",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      duration: 0.8,
+      y: 30,
+      opacity: 0,
+      stagger: 0.2,
+      ease: 'power3.out',
+    });
   }, []);
 
   const filteredMaterials = () => {
@@ -115,6 +158,10 @@ const StudyMaterials = () => {
       default: return <FileText className="h-4 w-4" />;
     }
   }
+
+  const openExternalLink = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <div className="container mx-auto px-4 py-8" ref={pageRef}>
@@ -138,6 +185,39 @@ const StudyMaterials = () => {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* External Resources Section */}
+      <div className="resources-section mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-center">Quick Access Resources</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {externalResources.map((resource, index) => (
+            <Card 
+              key={index} 
+              className="resource-card bg-white/5 border-border/60 hover:border-primary/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 backdrop-blur-sm cursor-pointer"
+              onClick={() => openExternalLink(resource.url)}
+            >
+              <CardHeader className="text-center pb-4">
+                <div className={`w-16 h-16 ${resource.bgColor} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                  <resource.icon className={`h-8 w-8 ${resource.color}`} />
+                </div>
+                <CardTitle className="text-xl">{resource.title}</CardTitle>
+                <p className="text-sm text-muted-foreground">{resource.description}</p>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="text-center space-y-3">
+                  <p className="text-xs text-muted-foreground">
+                    Last Updated: {new Date(resource.lastUpdated).toLocaleDateString()}
+                  </p>
+                  <Button className="w-full group">
+                    <ExternalLink className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform" />
+                    Access Now
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
 

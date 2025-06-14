@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, GraduationCap } from 'lucide-react';
+import { Menu, GraduationCap, ExternalLink } from 'lucide-react';
 
 const Header = () => {
   const navLinks = [
@@ -12,6 +12,10 @@ const Header = () => {
     { name: 'Lost & Found', path: '/lost-found' },
     { name: 'Campus Map', path: '/campus-map' },
   ];
+
+  const openStudentPortal = () => {
+    window.open('/student-portal', '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -32,7 +36,10 @@ const Header = () => {
           ))}
         </nav>
         <div className="flex flex-1 items-center justify-end gap-2">
-          <Button>Login</Button>
+          <Button onClick={openStudentPortal} className="group">
+            <ExternalLink className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform" />
+            Student Portal
+          </Button>
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
@@ -56,6 +63,10 @@ const Header = () => {
                       {link.name}
                     </Link>
                   ))}
+                  <Button onClick={openStudentPortal} className="mt-4 group">
+                    <ExternalLink className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform" />
+                    Student Portal
+                  </Button>
                 </div>
               </SheetContent>
             </Sheet>

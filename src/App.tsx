@@ -10,6 +10,7 @@ import StudyMaterials from "./pages/StudyMaterials";
 import LostFound from "./pages/LostFound";
 import CampusMap from "./pages/CampusMap";
 import Chatbot from "./pages/Chatbot";
+import StudentPortal from "./pages/StudentPortal";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 
@@ -21,17 +22,22 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/results" element={<Results />} />
-            <Route path="/study-materials" element={<StudyMaterials />} />
-            <Route path="/lost-found" element={<LostFound />} />
-            <Route path="/campus-map" element={<CampusMap />} />
-            <Route path="/chatbot" element={<Chatbot />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route path="/student-portal" element={<StudentPortal />} />
+          <Route path="*" element={
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/results" element={<Results />} />
+                <Route path="/study-materials" element={<StudyMaterials />} />
+                <Route path="/lost-found" element={<LostFound />} />
+                <Route path="/campus-map" element={<CampusMap />} />
+                <Route path="/chatbot" element={<Chatbot />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          } />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
