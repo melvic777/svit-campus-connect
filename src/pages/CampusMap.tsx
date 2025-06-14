@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -82,11 +83,11 @@ const CampusMap = () => {
     });
   }, []);
 
-  function filteredLocations() {
+  const filteredLocations = () => {
     return filter === 'all' 
       ? locations 
       : locations.filter(location => location.type === filter);
-  }
+  };
 
   function getTypeColor(type: string) {
     switch (type) {
@@ -185,7 +186,7 @@ const CampusMap = () => {
                 </div>
 
                 {/* Location Pins */}
-                {filteredLocations.map((location) => (
+                {filteredLocations().map((location) => (
                   <div
                     key={location.id}
                     className={`location-pin absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10`}

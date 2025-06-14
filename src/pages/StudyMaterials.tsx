@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -95,7 +96,7 @@ const StudyMaterials = () => {
     });
   }, []);
 
-  function filteredMaterials() {
+  const filteredMaterials = () => {
     return materials.filter(material => {
       const matchesSearch = material.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            material.subject.toLowerCase().includes(searchTerm.toLowerCase());
@@ -104,7 +105,7 @@ const StudyMaterials = () => {
       
       return matchesSearch && matchesSemester && matchesType;
     });
-  }
+  };
 
   function getTypeIcon(type: string) {
     switch (type) {
@@ -226,7 +227,7 @@ const StudyMaterials = () => {
 
       {/* Materials Grid */}
       <div className="materials-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredMaterials.map((material) => (
+        {filteredMaterials().map((material) => (
           <Card key={material.id} className="material-card bg-white/5 border-border/60 hover:border-primary/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-sm">
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between">
@@ -258,7 +259,7 @@ const StudyMaterials = () => {
         ))}
       </div>
 
-      {filteredMaterials.length === 0 && (
+      {filteredMaterials().length === 0 && (
         <div className="text-center py-12">
           <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-xl font-semibold mb-2">No materials found</h3>

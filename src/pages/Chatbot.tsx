@@ -35,6 +35,26 @@ const Chatbot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  const getBotResponse = (userInput: string): string => {
+    const input = userInput.toLowerCase();
+    
+    if (input.includes('admission') || input.includes('apply')) {
+      return "For admissions, please visit our admissions office or check the official SVIT website. The application process typically opens in May for the academic year.";
+    } else if (input.includes('result') || input.includes('grade')) {
+      return "You can check your results on our Results page. Please use your student ID and password to log in securely.";
+    } else if (input.includes('library') || input.includes('book')) {
+      return "The SVIT library is open from 8 AM to 8 PM on weekdays. You can access digital resources through our Study Materials section.";
+    } else if (input.includes('hostel') || input.includes('accommodation')) {
+      return "For hostel information, please contact the hostel warden at hostel@svit.ac.in or visit the administration office.";
+    } else if (input.includes('fee') || input.includes('payment')) {
+      return "Fee payment can be done online through our student portal. For fee structure details, please contact the accounts department.";
+    } else if (input.includes('contact') || input.includes('phone')) {
+      return "You can reach us at +91-XXX-XXXX-XXX or email admin@svit.ac.in. Our office hours are 9 AM to 5 PM, Monday to Friday.";
+    } else {
+      return "I'm here to help! You can ask me about admissions, results, library services, hostel information, fees, or general queries about SVIT.";
+    }
+  };
+
   const handleSend = async () => {
     if (!input.trim()) return;
 
@@ -61,26 +81,6 @@ const Chatbot = () => {
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
     }, 1500);
-  };
-
-  const getBotResponse = (userInput: string): string => {
-    const input = userInput.toLowerCase();
-    
-    if (input.includes('admission') || input.includes('apply')) {
-      return "For admissions, please visit our admissions office or check the official SVIT website. The application process typically opens in May for the academic year.";
-    } else if (input.includes('result') || input.includes('grade')) {
-      return "You can check your results on our Results page. Please use your student ID and password to log in securely.";
-    } else if (input.includes('library') || input.includes('book')) {
-      return "The SVIT library is open from 8 AM to 8 PM on weekdays. You can access digital resources through our Study Materials section.";
-    } else if (input.includes('hostel') || input.includes('accommodation')) {
-      return "For hostel information, please contact the hostel warden at hostel@svit.ac.in or visit the administration office.";
-    } else if (input.includes('fee') || input.includes('payment')) {
-      return "Fee payment can be done online through our student portal. For fee structure details, please contact the accounts department.";
-    } else if (input.includes('contact') || input.includes('phone')) {
-      return "You can reach us at +91-XXX-XXXX-XXX or email admin@svit.ac.in. Our office hours are 9 AM to 5 PM, Monday to Friday.";
-    } else {
-      return "I'm here to help! You can ask me about admissions, results, library services, hostel information, fees, or general queries about SVIT.";
-    }
   };
 
   return (
@@ -223,26 +223,6 @@ const Chatbot = () => {
       </div>
     </div>
   );
-
-  function getBotResponse(userInput: string): string {
-    const input = userInput.toLowerCase();
-    
-    if (input.includes('admission') || input.includes('apply')) {
-      return "For admissions, please visit our admissions office or check the official SVIT website. The application process typically opens in May for the academic year.";
-    } else if (input.includes('result') || input.includes('grade')) {
-      return "You can check your results on our Results page. Please use your student ID and password to log in securely.";
-    } else if (input.includes('library') || input.includes('book')) {
-      return "The SVIT library is open from 8 AM to 8 PM on weekdays. You can access digital resources through our Study Materials section.";
-    } else if (input.includes('hostel') || input.includes('accommodation')) {
-      return "For hostel information, please contact the hostel warden at hostel@svit.ac.in or visit the administration office.";
-    } else if (input.includes('fee') || input.includes('payment')) {
-      return "Fee payment can be done online through our student portal. For fee structure details, please contact the accounts department.";
-    } else if (input.includes('contact') || input.includes('phone')) {
-      return "You can reach us at +91-XXX-XXXX-XXX or email admin@svit.ac.in. Our office hours are 9 AM to 5 PM, Monday to Friday.";
-    } else {
-      return "I'm here to help! You can ask me about admissions, results, library services, hostel information, fees, or general queries about SVIT.";
-    }
-  }
 };
 
 export default Chatbot;
