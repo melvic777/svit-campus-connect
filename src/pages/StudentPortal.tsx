@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -39,7 +38,7 @@ const StudentPortal = () => {
               </div>
             </div>
             <h1 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
-              Sri Venkateswara Institute of Technology
+              Swami Vivekananda Institute of Technology
             </h1>
             <p className="text-sm text-muted-foreground uppercase tracking-wider">
               Learn • Lead • Serve
