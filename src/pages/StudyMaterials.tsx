@@ -41,39 +41,11 @@ const StudyMaterials = () => {
   ];
 
   useEffect(() => {
-    // Page entrance animation
+    // Simple fade-in for the page without affecting positioning
     gsap.from(pageRef.current, { 
-      duration: 1, 
-      y: 50, 
+      duration: 0.5, 
       opacity: 0, 
-      ease: 'power3.out' 
-    });
-
-    // Button entrance animations with stagger
-    gsap.from(".resource-button", {
-      duration: 0.8,
-      y: 60,
-      opacity: 0,
-      stagger: 0.2,
-      ease: 'power3.out',
-      delay: 0.3
-    });
-
-    // Title animation
-    gsap.from(".page-title", {
-      duration: 1,
-      y: -30,
-      opacity: 0,
-      ease: 'back.out(1.7)',
-      delay: 0.1
-    });
-
-    gsap.from(".page-subtitle", {
-      duration: 0.8,
-      y: 20,
-      opacity: 0,
-      ease: 'power2.out',
-      delay: 0.4
+      ease: 'power2.out' 
     });
   }, []);
 
@@ -85,10 +57,10 @@ const StudyMaterials = () => {
     <div className="container mx-auto px-4 py-12 min-h-screen bg-background" ref={pageRef}>
       {/* Hero Section with Minimal Design */}
       <div className="text-center mb-16">
-        <h1 className="page-title text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
           Study Resources
         </h1>
-        <p className="page-subtitle text-xl md:text-2xl text-foreground/90 max-w-2xl mx-auto">
+        <p className="text-xl md:text-2xl text-foreground/90 max-w-2xl mx-auto">
           Access Notes, Past Papers, and Lectures — Fast & Free
         </p>
       </div>
@@ -99,7 +71,7 @@ const StudyMaterials = () => {
           {studyResources.map((resource, index) => (
             <Card 
               key={index}
-              className={`resource-button bg-card/80 border-2 border-border/80 ${resource.hoverColor} hover:bg-card/90 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl backdrop-blur-sm cursor-pointer group`}
+              className={`bg-card/80 border-2 border-border/80 ${resource.hoverColor} hover:bg-card/90 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl backdrop-blur-sm cursor-pointer group`}
               onClick={() => openExternalLink(resource.url)}
             >
               <CardContent className="p-8 text-center">
