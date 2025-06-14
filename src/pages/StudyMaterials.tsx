@@ -17,8 +17,8 @@ const StudyMaterials = () => {
       icon: BookOpen,
       url: 'https://drive.google.com/drive/folders/1Mc3MjPMIXIcP8ZpPEmWxBqkSWHaz7wP-?usp=sharing',
       color: 'text-blue-400',
-      bgColor: 'bg-blue-400/20',
-      hoverColor: 'hover:border-blue-400/50'
+      bgColor: 'bg-blue-500/20',
+      hoverColor: 'hover:border-blue-400/70'
     },
     {
       title: 'Previous Year Questions',
@@ -26,8 +26,8 @@ const StudyMaterials = () => {
       icon: FileText,
       url: 'https://drive.google.com/drive/folders/1Mc3MjPMIXIcP8ZpPEmWxBqkSWHaz7wP-?usp=sharing',
       color: 'text-green-400',
-      bgColor: 'bg-green-400/20',
-      hoverColor: 'hover:border-green-400/50'
+      bgColor: 'bg-green-500/20',
+      hoverColor: 'hover:border-green-400/70'
     },
     {
       title: 'Video Lectures',
@@ -35,8 +35,8 @@ const StudyMaterials = () => {
       icon: Video,
       url: 'https://www.youtube.com/@SudhakarAtchala/playlists',
       color: 'text-red-400',
-      bgColor: 'bg-red-400/20',
-      hoverColor: 'hover:border-red-400/50'
+      bgColor: 'bg-red-500/20',
+      hoverColor: 'hover:border-red-400/70'
     }
   ];
 
@@ -82,13 +82,13 @@ const StudyMaterials = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12 min-h-screen" ref={pageRef}>
+    <div className="container mx-auto px-4 py-12 min-h-screen bg-background" ref={pageRef}>
       {/* Hero Section with Minimal Design */}
       <div className="text-center mb-16">
         <h1 className="page-title text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
           Study Resources
         </h1>
-        <p className="page-subtitle text-xl md:text-2xl text-foreground/80 max-w-2xl mx-auto">
+        <p className="page-subtitle text-xl md:text-2xl text-foreground/90 max-w-2xl mx-auto">
           Access Notes, Past Papers, and Lectures — Fast & Free
         </p>
       </div>
@@ -99,7 +99,7 @@ const StudyMaterials = () => {
           {studyResources.map((resource, index) => (
             <Card 
               key={index}
-              className={`resource-button bg-white/5 border-border/60 ${resource.hoverColor} hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl backdrop-blur-sm cursor-pointer group`}
+              className={`resource-button bg-card/80 border-2 border-border/80 ${resource.hoverColor} hover:bg-card/90 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl backdrop-blur-sm cursor-pointer group`}
               onClick={() => openExternalLink(resource.url)}
             >
               <CardContent className="p-8 text-center">
@@ -109,7 +109,7 @@ const StudyMaterials = () => {
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors duration-300">
                   {resource.title}
                 </h3>
                 
@@ -119,7 +119,7 @@ const StudyMaterials = () => {
                 </p>
                 
                 {/* Action Button */}
-                <Button className="w-full group-hover:shadow-glow-primary transition-all duration-300">
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 group-hover:shadow-glow-primary transition-all duration-300">
                   <ExternalLink className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform" />
                   Access Now
                 </Button>
@@ -131,7 +131,7 @@ const StudyMaterials = () => {
 
       {/* Additional Info Section */}
       <div className="text-center mt-16 max-w-2xl mx-auto">
-        <div className="bg-white/5 backdrop-blur-sm rounded-lg border border-border/60 p-6">
+        <div className="bg-card/60 backdrop-blur-sm rounded-lg border border-border/60 p-6">
           <p className="text-sm text-muted-foreground mb-4">
             All resources open in a new tab for uninterrupted browsing
           </p>
