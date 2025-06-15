@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Menu, GraduationCap, User, LogOut, Mail } from 'lucide-react';
+import { Menu, GraduationCap, LogOut, Mail } from 'lucide-react';
 
 const Header = () => {
   const navLinks = [
@@ -53,13 +53,8 @@ const Header = () => {
                 className="relative h-12 w-12 rounded-full p-0 bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 shadow-lg hover:shadow-glow-primary/30"
               >
                 <Avatar className="h-10 w-10 bg-gradient-to-br from-primary/30 to-blue-500/20 backdrop-blur-sm border-2 border-white/20 shadow-inner">
-                  <AvatarImage 
-                    src="/placeholder.svg" 
-                    alt={demoUser.name}
-                    className="object-cover opacity-90"
-                  />
                   <AvatarFallback className="bg-gradient-to-br from-primary/40 to-blue-500/30 text-white font-bold text-sm backdrop-blur-sm border border-white/20 shadow-inner">
-                    {demoUser.name.split(' ').map(n => n[0]).join('')}
+                    SU
                   </AvatarFallback>
                 </Avatar>
                 {/* Glossy overlay effect */}
@@ -71,13 +66,8 @@ const Header = () => {
                 {/* User Info Section */}
                 <div className="flex items-center gap-3 pb-3 border-b border-white/10">
                   <Avatar className="h-12 w-12 bg-gradient-to-br from-primary/30 to-blue-500/20 backdrop-blur-sm border-2 border-white/20 shadow-inner">
-                    <AvatarImage 
-                      src="/placeholder.svg" 
-                      alt={demoUser.name}
-                      className="object-cover opacity-90"
-                    />
                     <AvatarFallback className="bg-gradient-to-br from-primary/40 to-blue-500/30 text-white font-bold backdrop-blur-sm border border-white/20 shadow-inner">
-                      {demoUser.name.split(' ').map(n => n[0]).join('')}
+                      SU
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1 space-y-1">
@@ -134,13 +124,8 @@ const Header = () => {
                   <div className="mt-6 pt-4 border-t border-white/10">
                     <div className="flex items-center gap-3 mb-4 p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                       <Avatar className="h-10 w-10 bg-gradient-to-br from-primary/30 to-blue-500/20 backdrop-blur-sm border-2 border-white/20 shadow-inner">
-                        <AvatarImage 
-                          src="/placeholder.svg" 
-                          alt={demoUser.name}
-                          className="object-cover opacity-90"
-                        />
                         <AvatarFallback className="bg-gradient-to-br from-primary/40 to-blue-500/30 text-white font-bold backdrop-blur-sm border border-white/20 shadow-inner">
-                          {demoUser.name.split(' ').map(n => n[0]).join('')}
+                          SU
                         </AvatarFallback>
                       </Avatar>
                       <div>
