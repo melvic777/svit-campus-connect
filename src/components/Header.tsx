@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, GraduationCap } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
 
 const Header = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const navLinks = [
     { name: 'Chatbot', path: '/chatbot' },
     { name: 'Results', path: '/results' },
@@ -12,6 +16,24 @@ const Header = () => {
     { name: 'Lost & Found', path: '/lost-found' },
     { name: 'Campus Map', path: '/campus-map' },
   ];
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    window.location.href = 'https://svit-portal-glass-glow.vercel.app/';
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -32,6 +54,39 @@ const Header = () => {
           ))}
         </nav>
         <div className="flex flex-1 items-center justify-end gap-2">
+          {/* Student Profile Icon */}
+          <div className="relative" ref={dropdownRef}>
+            <div
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white font-bold text-sm backdrop-blur-md border border-cyan-300/50 shadow-lg hover:scale-105 hover:shadow-cyan-500/30 hover:border-cyan-300 cursor-pointer transition-all duration-200"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              SU
+            </div>
+
+            {/* Profile Dropdown */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-64 p-4 bg-slate-900/90 backdrop-blur-xl rounded-xl text-white shadow-xl border border-cyan-400/20 animate-fade-in">
+                <div className="space-y-1">
+                  <p className="font-semibold text-lg text-cyan-100">Student User</p>
+                  <p className="text-sm text-cyan-200 mb-2">studentuser1@svit.edu.in</p>
+                  <div className="space-y-1 text-sm text-slate-300">
+                    <p>Roll No: 23P71A0XXX</p>
+                    <p>Branch: Computer Science</p>
+                    <p>Year: 2nd Year</p>
+                    <p>Semester: 2nd Semester</p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleLogout}
+                  className="mt-4 w-full bg-cyan-500/10 border border-cyan-300/50 text-white py-2 rounded-lg hover:bg-cyan-500/20 hover:border-cyan-300 transition-all duration-200 font-medium"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+
           {/* Mobile Menu */}
           <div className="md:hidden">
             <Sheet>
